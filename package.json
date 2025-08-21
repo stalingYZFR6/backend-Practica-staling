@@ -1,0 +1,15 @@
+{
+  "name": "backend-practica-staling",
+  "version": "1.0.0",
+  "description": "backend practica chad staling scully",
+  "license": "ISC",
+  "author": "Staling loaisiga",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
