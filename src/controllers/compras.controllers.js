@@ -79,3 +79,32 @@ export const eliminarCompra = async (req, res) => {
     return res.status(500).json({ mensaje: "Error al eliminar la compra", error: error.message });
   }
 };
+
+
+// Actualizar parcialmente una compra por su ID
+export const actualizarCompraPatch = async (req, res) => {
+  try {
+    const { id_compra } = req.params;
+    const datos = req.body;
+
+    const [result] = await pool.query(
+      'UPDATE compras SET ? WHERE id_compra = ?',
+      [datos, id_compra]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        mensaje: `Compra con ID ${id_compra} no encontrada.`
+      });
+    }
+
+    res.status(200).json({
+      mensaje: `Compra con ID ${id_compra} actualizada correctamente.`
+    });
+  } catch (error) {
+    res.status(500).json({
+      mensaje: 'Error al actualizar la compra.',
+      error
+    });
+  }
+};

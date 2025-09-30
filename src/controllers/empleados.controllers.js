@@ -51,3 +51,31 @@ export const eliminarEmpleado = async (req, res) => {
     return res.status(500).json({ mensaje: "Error al eliminar el empleado", error: error.message });
   }
 };
+
+// Actualizar parcialmente un empleado por su ID
+export const actualizarEmpleadoPatch = async (req, res) => {
+  try {
+    const { id_empleado } = req.params;
+    const datos = req.body;
+
+    const [result] = await pool.query(
+      'UPDATE empleados SET ? WHERE id_empleado = ?',
+      [datos, id_empleado]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        mensaje: `Empleado con ID ${id_empleado} no encontrado.`
+      });
+    }
+
+    res.status(200).json({
+      mensaje: `Empleado con ID ${id_empleado} actualizado correctamente.`
+    });
+  } catch (error) {
+    res.status(500).json({
+      mensaje: 'Error al actualizar el empleado.',
+      error
+    });
+  }
+};

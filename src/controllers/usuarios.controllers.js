@@ -51,3 +51,32 @@ export const eliminarUsuario = async (req, res) => {
     return res.status(500).json({ mensaje: "Error al eliminar el usuario", error: error.message });
   }
 };
+
+
+// Actualizar parcialmente un usuario por su ID
+export const actualizarUsuarioPatch = async (req, res) => {
+  try {
+    const { id_usuario } = req.params;
+    const datos = req.body;
+
+    const [result] = await pool.query(
+      'UPDATE usuarios SET ? WHERE id_usuario = ?',
+      [datos, id_usuario]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        mensaje: `Usuario con ID ${id_usuario} no encontrado.`
+      });
+    }
+
+    res.status(200).json({
+      mensaje: `Usuario con ID ${id_usuario} actualizado correctamente.`
+    });
+  } catch (error) {
+    res.status(500).json({
+      mensaje: 'Error al actualizar el usuario.',
+      error
+    });
+  }
+};

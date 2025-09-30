@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { obtenerDetallesVentas, obtenerDetallesVenta, eliminarDetalleVenta} from '../controllers/detalles_ventas.controllers.js';
+import { obtenerDetallesVentas, obtenerDetallesVenta, eliminarDetalleVenta, actualizarDetalleVentaPatch } from '../controllers/detalles_ventas.controllers.js';
 
 const router = Router();
 
@@ -12,5 +12,8 @@ router.get('/detalles_ventas/:id_detalle_venta', obtenerDetallesVenta);
 
 // Ruta para eliminar un detalle de venta por su ID
 router.delete('/eliminar_detalleventa/:id_detalle_venta', eliminarDetalleVenta);
+
+// Ruta para actualizar parcialmente un detalle de venta por su ID
+router.patch('/detalles_ventas/:id_detalle_venta', actualizarDetalleVentaPatch);
 
 export default router;
