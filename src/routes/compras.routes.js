@@ -10,7 +10,7 @@ router.get('/compras', obtenerCompras);
 router.get('/compras/:id_compra', obtenerCompra);
 
 // Ruta para registrar una nueva compra
-router.get('/registrarcompra', registrarCompra);
+router.post('/registrarcompra', registrarCompra);
 
 // Ruta para eliminar una compra por su ID
 router.delete('/eliminarcompra/:id_compra', eliminarCompra);
