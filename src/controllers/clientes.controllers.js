@@ -3,7 +3,7 @@ import { pool } from '../../db_conection.js';
 // Obtener todas los clientes
 export const obtenerClientes = async (req, res) => {
     try {
-        const [result] = await pool.query('SELECT * FROM clientes');
+        const [result] = await pool.query('SELECT * FROM Clientes');
         res.json(result);
     } catch (error) {
         return res.status(500).json({
@@ -32,7 +32,9 @@ if (result.length <= 0) {
 };
 
 // Registrar una nueva Cliente
-export const registrarCliente= async (req, res) => {
+export const 
+
+registrarCliente= async (req, res) => {
     try {
         const {
         primer_nombre,
@@ -46,7 +48,7 @@ export const registrarCliente= async (req, res) => {
         } = req.body;
 
         const [result] = await pool.query(
-            'INSERT INTO Clientes(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, celular, direccion, cedula) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO Clientes (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, celular, direccion, cedula) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [
                 primer_nombre,
                 segundo_nombre,
@@ -73,7 +75,7 @@ export const eliminarCliente = async (req, res) => {
     const { id_cliente } = req.params;
 
     const [result] = await pool.query(
-      "DELETE FROM clientes WHERE id_cliente = ?",
+      "DELETE FROM Clientes WHERE id_cliente = ?",
       [id_cliente]
     );
 
@@ -95,7 +97,7 @@ export const actualizarClientePatch = async (req, res) => {
     const datos = req.body;
 
     const [result] = await pool.query(
-      'UPDATE clientes SET ? WHERE id_cliente = ?',
+      'UPDATE Clientes SET ? WHERE id_cliente = ?',
       [datos, id_cliente]
     );
 
