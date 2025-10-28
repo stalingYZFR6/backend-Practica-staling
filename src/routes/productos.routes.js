@@ -6,6 +6,9 @@ const router = Router();
 // Ruta para obtener todos los clientes
 router.get('/productos', obtenerProductos);
 
+// Registrar un nuevo producto
+router.post("/registrarproducto", registrarProducto);
+
 // Ruta para obtener un cliente por su id
 router.get('/productos/:id_productos', obtenerProducto);
 

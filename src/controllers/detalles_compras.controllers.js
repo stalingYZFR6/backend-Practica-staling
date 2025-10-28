@@ -23,13 +23,43 @@ if (result.length <= 0) {
                 mensaje: `Error al leer los datos. ID ${id_detalle_compra} no encontrado.`
             });
         }
-        res.json(result[0]);
-    } catch (error) {
-        return res.status(500).json({
-            mensaje: 'Ha ocurrido un error al leer los datos de los detalles_compra.'
-        });
-    }
+    res.json(result[0]);
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: 'Ha ocurrido un error al leer los datos de los detalles_compra.'
+    });
+  }
 };
+
+// Registrar un nuevo detalle de compra
+export const registrarDetalleCompra = async (req, res) => {
+  try {
+    const { id_compra, id_producto, cantidad, precio_unitario } = req.body;
+
+    // Validación básica
+    if (!id_compra || !id_producto || !cantidad || !precio_unitario) {
+      return res.status(400).json({
+        mensaje: "Todos los campos son obligatorios: id_compra, id_producto, cantidad, precio_unitario."
+      });
+    }
+
+    const [result] = await pool.query(
+      "INSERT INTO Detalles_Compras (id_compra, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?)",
+      [id_compra, id_producto, cantidad, precio_unitario]
+    );
+
+    res.status(201).json({
+      mensaje: "Detalle de compra registrado correctamente.",
+      id_detalle_compra: result.insertId
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: "Error al registrar el detalle de compra.",
+      error: error.message
+    });
+  }
+};
+
 
 // Eliminar un detalle de compra por su ID
 export const eliminarDetalleCompra = async (req, res) => {
@@ -37,7 +67,7 @@ export const eliminarDetalleCompra = async (req, res) => {
     const { id_detalle_compra } = req.params;
 
     const [result] = await pool.query(
-      "DELETE FROM detalle_compra WHERE id_detalle_compra = ?",
+      "DELETE FROM Detalles_compras WHERE id_detalle_compra = ?",
       [id_detalle_compra]
     );
 
@@ -60,7 +90,7 @@ export const actualizarDetalleCompraPatch = async (req, res) => {
     const datos = req.body;
 
     const [result] = await pool.query(
-      'UPDATE detalles_compras SET ? WHERE id_detalle_compra = ?',
+      'UPDATE Detalles_compras SET ? WHERE id_detalle_compra = ?',
       [datos, id_detalle_compra]
     );
 

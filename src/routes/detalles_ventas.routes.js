@@ -10,6 +10,11 @@ router.get('/detalles_ventas', obtenerDetallesVentas);
 router.get('/detalles_ventas/:id_detalle_venta', obtenerDetallesVenta);
 
 
+// Registrar un nuevo detalle de venta
+router.post("/registrardetalleventa", registrarDetalleVenta);
+
+
+
 // Ruta para eliminar un detalle de venta por su ID
 router.delete('/eliminar_detalleventa/:id_detalle_venta', eliminarDetalleVenta);
 

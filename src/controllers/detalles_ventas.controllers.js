@@ -10,7 +10,37 @@ export const obtenerDetallesVentas = async (req, res) => {
             mensaje: 'Ha ocurrido un error al leer los datos.',
             error: error
         });
+  }
+};
+
+// Registrar un nuevo detalle de venta
+export const registrarDetalleVenta = async (req, res) => {
+  try {
+    const { id_venta, id_producto, cantidad, precio_unitario } = req.body;
+
+    // Validación básica
+    if (!id_venta || !id_producto || !cantidad || !precio_unitario) {
+      return res.status(400).json({
+        mensaje: "Todos los campos son obligatorios: id_venta, id_producto, cantidad, precio_unitario."
+      });
     }
+
+    const [result] = await pool.query(
+      "INSERT INTO Detalles_Ventas (id_venta, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?)",
+      [id_venta, id_producto, cantidad, precio_unitario]
+    );
+
+    res.status(201).json({
+      mensaje: "Detalle de venta registrado correctamente.",
+      id_detalle_venta: result.insertId
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: "Error al registrar el detalle de venta.",
+      error: error.message
+    });
+  }
 };
 
 // Obtener datalles compra por su ID
@@ -37,7 +67,7 @@ export const eliminarDetalleVenta = async (req, res) => {
     const { id_detalle_venta } = req.params;
 
     const [result] = await pool.query(
-      "DELETE FROM detalle_venta WHERE id_detalle_venta = ?",
+      "DELETE FROM Detalles_ventas WHERE id_detalle_venta = ?",
       [id_detalle_venta]
     );
 
@@ -59,7 +89,7 @@ export const actualizarDetalleVentaPatch = async (req, res) => {
     const datos = req.body;
 
     const [result] = await pool.query(
-      'UPDATE detalles_ventas SET ? WHERE id_detalle_venta = ?',
+      'UPDATE Detalles_ventas SET ? WHERE id_detalle_venta = ?',
       [datos, id_detalle_venta]
     );
 

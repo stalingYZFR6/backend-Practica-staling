@@ -9,6 +9,9 @@ router.get('/detalles_compras', obtenerDetallesCompras);
 // Ruta para obtener un cliente por su id
 router.get('/detalles_compras/:id_detalle_compra', obtenerDetallesCompra);
 
+// Ruta para registarr 
+router.post("/registrardetalle", registrarDetalleCompra);
+
 // Ruta para eliminar un detalle de compra por su ID
 router.delete('/eliminar_detallecompra/:id_detalle_compra', eliminarDetalleCompra);
 

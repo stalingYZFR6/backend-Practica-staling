@@ -10,7 +10,7 @@ router.get('/categorias', obtenerCategorias);
 router.get('/categoria/:id_categoria', obtenerCategoria);
 
 // Ruta para registrar una nueva categoria
-router.get('/registrarcategoria', registrarCategoria);
+router.post('/registrarcategoria', registrarCategoria);
 
 // Ruta para eliminar una categoría por su ID
 router.delete('/eliminarcategoria/:id_categoria', eliminarCategoria);

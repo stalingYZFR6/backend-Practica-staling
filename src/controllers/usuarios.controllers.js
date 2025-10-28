@@ -13,6 +13,35 @@ export const obtenerUsuarios = async (req, res) => {
     }
 };
 
+// Registrar un nuevo usuario
+export const registrarUsuario = async (req, res) => {
+    try {
+        const { usuario, contraseña } = req.body;
+
+        if (!usuario || !contraseña) {
+            return res.status(400).json({
+                mensaje: 'Los campos usuario y contraseña son obligatorios.'
+            });
+        }
+
+        const [result] = await pool.query(
+            'INSERT INTO Usuarios (usuario, contraseña) VALUES (?, ?)',
+            [usuario, contraseña]
+        );
+
+        res.status(201).json({
+            mensaje: 'Usuario registrado correctamente.',
+            id_usuario: result.insertId
+        });
+    } catch (error) {
+        return res.status(500).json({
+            mensaje: 'Error al registrar el usuario.',
+            error: error.message
+        });
+    }
+};
+
+
 // Obtener un cliente por su ID
 export const obtenerUsuario = async (req, res) => {
     try {

@@ -6,6 +6,9 @@ const router = Router();
 // Ruta para obtener todos los clientes
 router.get('/empleados', obtenerEmpleados);
 
+// Registrar un nuevo empleado
+router.post("/registrarempleado", registrarEmpleado);
+
 // Ruta para obtener un cliente por su id
 router.get('/empleados/:id_empleados', obtenerEmpleado);
 

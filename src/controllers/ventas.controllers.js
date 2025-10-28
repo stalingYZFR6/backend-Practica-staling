@@ -13,6 +13,38 @@ export const obtenerVentas = async (req, res) => {
     }
 };
 
+
+// Registrar una nueva venta
+export const registrarVenta = async (req, res) => {
+  try {
+    const { id_cliente, id_empleado, total_venta } = req.body;
+
+    // Validación básica
+    if (!id_cliente || !id_empleado || !total_venta) {
+      return res.status(400).json({
+        mensaje: "Los campos id_cliente, id_empleado y total_venta son obligatorios."
+      });
+    }
+
+    const [result] = await pool.query(
+      `INSERT INTO Ventas (id_cliente, id_empleado, total_venta) VALUES (?, ?, ?)`,
+      [id_cliente, id_empleado, total_venta]
+    );
+
+    res.status(201).json({
+      mensaje: "Venta registrada correctamente.",
+      id_venta: result.insertId
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: "Error al registrar la venta.",
+      error: error.message
+    });
+  }
+};
+
+
 // Obtener un cliente por su ID
 export const obtenerVenta = async (req, res) => {
     try {

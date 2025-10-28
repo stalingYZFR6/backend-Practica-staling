@@ -31,7 +31,7 @@ if (result.length <= 0) {
     }
 };
 
-// Registrar una nueva Categoría
+// Registrar una nueva Cliente
 export const registrarCliente= async (req, res) => {
     try {
         const {

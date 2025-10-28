@@ -31,7 +31,7 @@ if (result.length <= 0) {
     }
 };
 
-// Registrar una nueva Categoría
+// Registrar una nueva Compra
 export const registrarCompra= async (req, res) => {
     try {
         const {
@@ -42,7 +42,7 @@ export const registrarCompra= async (req, res) => {
         } = req.body;
 
         const [result] = await pool.query(
-            'INSERT INTO compras (id_empleado, fecha_compra, total_compra) VALUES (?, ?, ?)',
+            'INSERT INTO Compras (id_empleado, fecha_compra, total_compra) VALUES (?, ?, ?)',
             [
                 id_empleado,
                 fecha_compra,

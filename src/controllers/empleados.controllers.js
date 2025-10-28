@@ -13,6 +13,47 @@ export const obtenerEmpleados = async (req, res) => {
     }
 };
 
+
+// Registrar un nuevo empleado
+export const registrarEmpleado = async (req, res) => {
+  try {
+    const {
+      primer_nombre,
+      segundo_nombre,
+      primer_apellido,
+      segundo_apellido,
+      celular,
+      cargo,
+      fecha_contratacion
+    } = req.body;
+
+    // Validación básica
+    if (!primer_nombre || !primer_apellido || !celular || !cargo || !fecha_contratacion) {
+      return res.status(400).json({
+        mensaje: "Los campos primer_nombre, primer_apellido, celular, cargo y fecha_contratacion son obligatorios."
+      });
+    }
+
+    const [result] = await pool.query(
+      `INSERT INTO Empleados 
+            (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, celular, cargo, fecha_contratacion) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [primer_nombre, segundo_nombre || '', primer_apellido, segundo_apellido || '', celular, cargo, fecha_contratacion]
+    );
+
+    res.status(201).json({
+      mensaje: "Empleado registrado correctamente.",
+      id_empleado: result.insertId
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: "Error al registrar el empleado.",
+      error: error.message
+    });
+  }
+};
+
 // Obtener un cliente por su ID
 export const obtenerEmpleado = async (req, res) => {
     try {

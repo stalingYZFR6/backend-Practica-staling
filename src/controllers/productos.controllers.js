@@ -13,6 +13,53 @@ export const obtenerProductos = async (req, res) => {
     }
 };
 
+
+// Registrar un nuevo producto
+export const registrarProducto = async (req, res) => {
+    try {
+        const {
+            nombre_producto,
+            descripcion_producto,
+            id_categoria,
+            precio_unitario,
+            stock,
+            imagen
+        } = req.body;
+
+        // Validación básica
+        if (!nombre_producto || !id_categoria || !precio_unitario || !stock) {
+            return res.status(400).json({
+                mensaje: "Los campos nombre_producto, id_categoria, precio_unitario y stock son obligatorios."
+            });
+        }
+
+        const [result] = await pool.query(
+            `INSERT INTO Productos 
+            (nombre_producto, descripcion_producto, id_categoria, precio_unitario, stock, imagen) 
+            VALUES (?, ?, ?, ?, ?, ?)`,
+            [
+                nombre_producto,
+                descripcion_producto || "",
+                id_categoria,
+                precio_unitario,
+                stock,
+                imagen || ""
+            ]
+        );
+
+        res.status(201).json({
+            mensaje: "Producto registrado correctamente.",
+            id_producto: result.insertId
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            mensaje: "Error al registrar el producto.",
+            error: error.message
+        });
+    }
+};
+
 // Obtener un cliente por su ID
 export const obtenerProducto = async (req, res) => {
     try {
