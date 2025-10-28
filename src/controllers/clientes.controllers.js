@@ -46,7 +46,7 @@ export const registrarCliente= async (req, res) => {
         } = req.body;
 
         const [result] = await pool.query(
-            'INSERT INTO clientes(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, celular, direccion, cedula) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO Clientes(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, celular, direccion, cedula) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [
                 primer_nombre,
                 segundo_nombre,
