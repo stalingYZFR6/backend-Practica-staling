@@ -1,22 +1,21 @@
 import { Router } from 'express';
-import { obtenerCategorias, obtenerCategoria, registrarCategoria, eliminarCategoria, actualizarCategoriaPatch   } from '../controllers/categorias.controllers.js';
+import { obtenerCategorias, obtenerCategoria, registrarCategoria,eliminarCategoria, actualizarCategoriaPatch } from '../controllers/categorias.controller.js';
 
 const router = Router();
 
-// Ruta para obtener todos los clientes
 router.get('/categorias', obtenerCategorias);
 
-// Ruta para obtener una categoria por su id
+// Ruta para orbtener una categoria por su ID
 router.get('/categoria/:id_categoria', obtenerCategoria);
 
-// Ruta para registrar una nueva categoria
-router.post('/registrarcategoria', registrarCategoria);
+// Rutas para registrar una categoria
+router.post('/registrarCategoria', registrarCategoria);
 
 // Ruta para eliminar una categoría por su ID
 router.delete('/eliminarcategoria/:id_categoria', eliminarCategoria);
 
-// Ruta para actualizar parcialmente una categoría por su ID
-router.patch('/categorias/:id_categoria', actualizarCategoriaPatch);
+router.patch("/actualizarCategoriaPatch/:id_categoria", actualizarCategoriaPatch);
 
 
+// Rutas
 export default router;

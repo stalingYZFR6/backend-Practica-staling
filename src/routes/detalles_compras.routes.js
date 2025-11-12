@@ -1,22 +1,20 @@
 import { Router } from 'express';
-import { obtenerDetallesCompras, registrarDetalleCompra, obtenerDetallesCompra, eliminarDetalleCompra, actualizarDetalleCompraPatch } from '../controllers/detalles_compras.controllers.js';
+import { obtenerDetallesCompras, obtenerDetalleCompra, registrarDetalleCompra, eliminarDetalleCompra, actualizarDetalleCompraPatch } from '../controllers/detalles_compras.controller.js';
 
 const router = Router();
 
-// Ruta para obtener todos los clientes
-router.get('/detalles_compras', obtenerDetallesCompras);
+router.get('/detallescompras', obtenerDetallesCompras);
 
-// Ruta para obtener un cliente por su id
-router.get('/detalles_compras/:id_detalle_compra', obtenerDetallesCompra);
+// Ruta para orbtener una categoria por su ID
+router.get('/detalle_compra/:id_detalle_compra', obtenerDetalleCompra);
 
-// Ruta para registarr 
-router.post("/registrardetalle", registrarDetalleCompra);
+// Rutas para registrar un detallecompra
+router.post('/registrarDetalleCompra', registrarDetalleCompra);
 
-// Ruta para eliminar un detalle de compra por su ID
-router.delete('/eliminar_detallecompra/:id_detalle_compra', eliminarDetalleCompra);
+// Ruta para eliminar un detalle_copra por su ID
+router.delete('/eliminardetalles_compras/:id_detalle_compra', eliminarDetalleCompra);
 
-// Ruta para actualizar parcialmente un detalle de compra por su ID
-router.patch('/detalles_compras/:id_detalle_compra', actualizarDetalleCompraPatch);
+router.patch("/actualizarDeatlleCompraiaPatch/:id_detalle_compra", actualizarDetalleCompraPatch);
 
-
+// Rutas
 export default router;
