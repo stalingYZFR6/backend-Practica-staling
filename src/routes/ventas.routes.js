@@ -3,9 +3,10 @@ import { eliminarVenta, obtenerVenta, obtenerVentas, registrarVenta, actualizarV
 
 const router = Router();
 
+//ruta para obtener todas las ventas
 router.get('/ventas', obtenerVentas);
 
-// Ruta para orbtener una categoria por su ID
+// Ruta para orbtener una venta por su ID
 router.get('/venta/:id_venta', obtenerVenta);
 
 // Rutas para registrar una venta
