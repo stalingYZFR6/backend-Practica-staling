@@ -1,6 +1,6 @@
 import { pool } from "../../db_conection.js";
 
-// Obtener todas las categorías
+// Obtener todas las venta
 export const obtenerVentas = async (req, res) => {
   try {
     const [result] = await pool.query('SELECT * FROM ventas');
