@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { eliminarUsuario, obtenerUsuario, obtenerUsuarios, registrarUsuario, actualizarUsuarioPatch } from '../controllers/usuarios.controller.js';
+import { eliminarUsuario, obtenerUsuario, obtenerUsuarios, registrarUsuario, actualizarUsuarioPatch, verificarUsuario} from '../controllers/usuarios.controller.js';
 
 const router = Router();
+
+router.post('/verificarUsuario', verificarUsuario);
 
 router.get('/usuarios', obtenerUsuarios);
 
